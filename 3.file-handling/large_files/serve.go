@@ -57,7 +57,7 @@ func server_bufio() {
 		c.Header("Content-Length", strconv.FormatInt(fileSize, 10))
 
 		// create a buffered reader with a buffer size of 1MB
-		bufferSize := 1024 * 1024 // 1MB buffer size
+		bufferSize := 1024 * 1024 * 8 // 1MB buffer size
 		bufferedReader := bufio.NewReaderSize(file, bufferSize)
 
 		// write the file contents to the response using the buffered reader's WriteTo method
@@ -120,7 +120,7 @@ func serve_loop() {
 		c.Header("Content-Length", strconv.FormatInt(fileSize, 10))
 
 		// create a buffer for reading the file in chunks
-		bufferSize := 1024 * 1024 // 1MB buffer size
+		bufferSize := 1024 * 1024 * 8 // 1MB buffer size
 		buffer := make([]byte, bufferSize)
 
 		// start reading the file in chunks and writing them to the response

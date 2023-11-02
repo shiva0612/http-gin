@@ -58,7 +58,7 @@ func upload_copy_buffer() {
 		defer video.Close()
 
 		// copy the contents of the uploaded file to the new file
-		bufferSize := 1024 * 1024 // 1MB buffer size
+		bufferSize := 1024 * 1024 * 8 // 1MB buffer size
 		buffer := make([]byte, bufferSize)
 		_, err = io.CopyBuffer(file, video, buffer)
 		if err != nil {
@@ -123,7 +123,7 @@ func upload_for_loop() {
 		// copy the contents of the uploaded file to the new file
 		// for{keep reading the contents using certain buffer}
 
-		b := make([]byte, 1024*1024)
+		b := make([]byte, 1024*1024*8)
 		for {
 			n, err := video.Read(b)
 			if err != nil {

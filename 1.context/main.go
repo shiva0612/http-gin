@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 	"time"
 
@@ -26,10 +27,14 @@ func using_gin(c *gin.Context) {
 	c.Param("name")    // to get url params
 	c.Query("name")    // to get query params
 	c.QueryMap("name") // to get entire map of query params
+	// c.ShouldBindJSON() for getting body
 
 	c.PostForm("name") //value or ""
 	c.FormFile("pic")  // give the first file
 	c.MultipartForm()  // entire form (values map[string]string, files map[string]*fileHeaders)
+
+	c.GetHeader("key")       //get header
+	c.Header("key", "value") //set header
 
 	c.String(400, "message", "values", "values")
 	c.JSON(400, gin.H{"key": "value"})
@@ -51,6 +56,8 @@ func using_gin(c *gin.Context) {
 	_ = w
 	r := c.Request
 	_ = r
+	ctx := c.Request.Context()
+	_ = ctx
 
 	c.Redirect(504, "newurl")
 
@@ -74,6 +81,9 @@ func using_http(w http.ResponseWriter, r *http.Request) {
 	// Get query parameters
 	_ = r.URL.Query().Get("age")
 
+	// BODY
+	// json.NewDecoder(r.Body).Decode(bodbody)
+
 	// Get form values
 	err := r.ParseForm()
 	if err != nil {
@@ -88,6 +98,8 @@ func using_http(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Handle the request
-	// ...
+	// r.Header.Set()
+	// r.Header.Get()
+
+	json.NewEncoder(w).Encode("something in json")
 }

@@ -12,7 +12,7 @@ func main() {
 }
 func simple() {
 	router := gin.Default()
-	router.Static("/assets", "../assets") //serving the folder, localhost:8080/assets/file.go
+	router.Static("/assets", "../assets") //serving the folder, localhost:8080/assets/file1.txt
 
 	router.StaticFile("/file1", "../assets/file.go")
 
