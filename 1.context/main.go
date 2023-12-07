@@ -24,8 +24,12 @@ func using_gin(c *gin.Context) {
 
 	c.Set("key", "value") //key values for this context
 
+	//localhost:8080/:name/:account_number
 	c.Param("name")    // to get url params
+
+	//localhost:8080?name=shiva&account=prepaid
 	c.Query("name")    // to get query params
+	
 	c.QueryMap("name") // to get entire map of query params
 	// c.ShouldBindJSON() for getting body
 
